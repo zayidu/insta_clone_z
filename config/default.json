@@ -1,4 +1,0 @@
-{
-  "mongoURI": "mongodb+srv://zayidu:zayidu123@instaclone-47z0r.mongodb.net/instaclonez?retryWrites=true&w=majority",
-  "jwtSecret": "zSecretTokenInsta"
-}
