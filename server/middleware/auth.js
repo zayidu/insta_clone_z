@@ -7,7 +7,7 @@ const User = mongoose.model('User');
 module.exports = (req, res, next) => {
   // const { token } = req.headers;
   const token = req.header('token');
-  console.log(token);
+  // console.log(token);
   if (!token) {
     return res.status(401).json({ error: 'You must be logged in' });
   }

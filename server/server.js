@@ -11,10 +11,15 @@ const app = express();
 // Connect Database MongoDB Atlas
 connectDB();
 // Start the community Server
+// MAC
 // ./mongod --dbpath ~/mongo-data
 // mongo
 
-const { User } = require('./models/user');
+// WIN
+// mongod.exe" --dbpath="c:\data\db"
+// mongo.exe
+
+// const { User } = require('./models/user');
 // const { Router } = require('express');
 
 // INIT Middleware
@@ -31,12 +36,11 @@ app.use(
 
 // Routes/ API End-points:
 
-// Authenticating
+// Authenticating - Register/Login
 app.use('/api/auth', require('./routes/api/auth'));
 
-// CRUD for User Model
-// app.use('/api/user', require('./routes/api/user'));
-// app.use('/api/users', require('./routes/api/user'));
+// CRUD for Post Model
+app.use('/api/post', require('./routes/api/post'));
 
 // IN Production, Except the routes above, Routing the UI routes and anyother routes that isn't above will be routed to index.html as below:
 // if (process.env.NODE_ENV === 'production') {

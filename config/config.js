@@ -5,7 +5,7 @@ const config = {
   },
   default: {
     SECRET: 'SUPERSECRETPASSWORD123',
-    DATABASE: 'mongodb://localhost:27017/bookaholic',
+    DATABASE: 'mongodb://localhost:27017/instaclonez',
   },
 };
 
