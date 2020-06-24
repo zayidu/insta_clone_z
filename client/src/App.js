@@ -1,5 +1,4 @@
 import React, { useEffect, createContext, useReducer, useContext } from 'react';
-import NavBar from './components/Navbar';
 import './App.css';
 import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
 import Home from './components/screens/Home';
@@ -12,6 +11,7 @@ import UserProfile from './components/screens/UserProfile';
 import Subscriber_sUserPosts from './components/screens/Subscriber_sUserPosts';
 import Reset from './components/screens/Reset';
 import NewPassword from './components/screens/Newpassword';
+import NavBar from './components/Navbar';
 
 // createContext
 export const UserContext = createContext();
