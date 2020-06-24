@@ -19,6 +19,7 @@ const Navbar = () => {
   const renderList = () => {
     if (state) {
       return [
+        // Logged In
         // Search Button
         <li key="1">
           <i
@@ -30,13 +31,64 @@ const Navbar = () => {
           </i>
         </li>,
         <li key="2">
-          <Link to="/profile">Profile</Link>
+          <Link to="/profile">
+            <i
+              class="material-icons"
+              style={{
+                float: 'left',
+              }}
+            >
+              person_pin
+            </i>{' '}
+            <span
+              className="hide-sm"
+              style={{
+                float: 'right',
+              }}
+            >
+              Profile
+            </span>
+          </Link>
         </li>,
         <li key="3">
-          <Link to="/create">Create Post</Link>
+          <Link to="/create">
+            <i
+              class="material-icons"
+              style={{
+                float: 'left',
+              }}
+            >
+              add_a_photo
+            </i>{' '}
+            <span
+              className="hide-sm"
+              style={{
+                float: 'right',
+              }}
+            >
+              Create a Post
+            </span>
+          </Link>
         </li>,
         <li key="4">
-          <Link to="/myfollowingpost">My following Posts</Link>
+          <Link to="/myfollowingpost">
+            <i
+              class="material-icons"
+              style={{
+                float: 'left',
+              }}
+            >
+              group
+            </i>
+            <span
+              className="hide-sm"
+              style={{
+                float: 'right',
+              }}
+            >
+              My follower's Posts
+            </span>
+          </Link>
         </li>,
         <li key="5">
           <button
@@ -52,6 +104,7 @@ const Navbar = () => {
         </li>,
       ];
     } else {
+      // Logged Out
       return [
         <li key="0">
           <a href="https://zayidu.github.io/portfolio/" target="_blank">

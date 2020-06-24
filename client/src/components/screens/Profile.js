@@ -99,6 +99,7 @@ const Profile = () => {
             <h4>{state ? state.name : 'loading'}</h4>
             <h5>{state ? state.email : 'loading'}</h5>
             <div
+              className="follow_list"
               style={{
                 display: 'flex',
                 justifyContent: 'space-between',

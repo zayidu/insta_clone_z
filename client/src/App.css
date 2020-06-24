@@ -8,7 +8,8 @@ a {
 h2 {
   font-family: 'Grand Hotel', cursive;
   font-weight: bolder;
-  margin-left: 30px;
+  margin-left: 20px;
+  width: auto;
 }
 
 .logoutbtn {
@@ -32,6 +33,46 @@ h2 {
 .input-field input[type='password']:focus {
   border-bottom: 1px solid rgb(8, 93, 252) !important;
   box-shadow: 0 1px 0 0 rgb(8, 93, 252) !important;
+}
+
+/* Mobile Styles */
+@media (max-width: 700px) {
+  .brand-logo,
+  h2 {
+    font-family: 'Grand Hotel', cursive;
+    font-weight: bolder;
+    margin-left: 20px;
+    width: auto;
+  }
+  #profileImage {
+    padding: 16px;
+  }
+  nav ul a {
+    padding-right: 3px;
+  }
+  a.brand-logo.left {
+    margin-left: 0px;
+  }
+  .logoutbtn {
+    margin-right: 2px;
+    padding: 0px 11px;
+    font-size: 10px;
+    font-weight: bolder;
+  }
+  .hide-sm {
+    display: none;
+  }
+  h5 {
+    font-size: larger;
+    margin-left: 10px;
+  }
+  h4 {
+    margin-left: 10px;
+  }
+  .follow_list h6 {
+    font-size: 12px;
+    margin-right: 16px;
+  }
 }
 
 .gallery {

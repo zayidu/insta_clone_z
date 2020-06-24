@@ -118,6 +118,7 @@ const UserProfile = () => {
               <h4>{userProfile.user.name}</h4>
               <h5>{userProfile.user.email}</h5>
               <div
+                className="follow_list"
                 style={{
                   display: 'flex',
                   justifyContent: 'space-between',
