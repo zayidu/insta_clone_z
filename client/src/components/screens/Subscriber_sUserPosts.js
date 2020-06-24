@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Subscriber_sUserPosts = () => {
   const [data, setData] = useState([]);
+  const [comment, setComment] = useState('');
   const { state, dispatch } = useContext(UserContext);
 
   useEffect(() => {
@@ -79,37 +80,41 @@ const Subscriber_sUserPosts = () => {
 
   // Comment on a Post
   const makeComment = (text, postId) => {
-    fetch('/api/post/comment', {
-      method: 'put',
-      headers: {
-        'Content-Type': 'application/json',
-        token: localStorage.getItem('jwt'),
-      },
-      body: JSON.stringify({
-        postId,
-        text,
-      }),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        // console.log(result);
-        const commentsInputs = document.querySelectorAll('.comments');
-        commentsInputs.forEach((comment) => {
-          comment.reset();
-        });
+    if (comment.trim()) {
+      let text = comment.trim();
 
-        const newData = data.map((item) => {
-          if (item._id == result._id) {
-            return result;
-          } else {
-            return item;
-          }
-        });
-        setData(newData);
+      fetch('/api/post/comment', {
+        method: 'put',
+        headers: {
+          'Content-Type': 'application/json',
+          token: localStorage.getItem('jwt'),
+        },
+        body: JSON.stringify({
+          postId,
+          text,
+        }),
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => res.json())
+        .then((result) => {
+          // console.log(result);
+          const commentsInputs = document.querySelectorAll('.comments');
+          commentsInputs.forEach((comment) => {
+            comment.reset();
+          });
+
+          const newData = data.map((item) => {
+            if (item._id == result._id) {
+              return result;
+            } else {
+              return item;
+            }
+          });
+          setData(newData);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   // Delete a post
@@ -229,7 +234,25 @@ const Subscriber_sUserPosts = () => {
                   makeComment(e.target[0].value, item._id);
                 }}
               >
-                <input type="text" placeholder="add a comment" />
+                <input
+                  className="commentInput"
+                  type="text"
+                  onChange={(e) => setComment(e.target.value)}
+                  placeholder="add a comment"
+                  style={{
+                    float: 'left',
+                  }}
+                />
+                <a
+                  type="submit"
+                  className="waves-effect waves-light btn commentSubmit"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    makeComment(e, item._id);
+                  }}
+                >
+                  Post
+                </a>
               </form>
             </div>
           </div>

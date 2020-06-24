@@ -86,6 +86,7 @@ const Navbar = () => {
                 float: 'right',
               }}
             >
+              {' '}
               My follower's Posts
             </span>
           </Link>

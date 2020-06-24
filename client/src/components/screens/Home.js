@@ -5,6 +5,7 @@ import Spinner from '../widgets/Spinner';
 
 const Home = () => {
   const [data, setData] = useState([]);
+  const [comment, setComment] = useState('');
   const { state, dispatch } = useContext(UserContext);
 
   useEffect(() => {
@@ -81,40 +82,43 @@ const Home = () => {
 
   // Comment On a Post
   const makeComment = (e, postId) => {
-    let text = e.target[0].value;
-    // console.log(text);
-    fetch('/api/post/comment', {
-      method: 'put',
-      headers: {
-        'Content-Type': 'application/json',
-        token: localStorage.getItem('jwt'),
-      },
-      body: JSON.stringify({
-        postId,
-        text,
-      }),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        console.log('Comments', result);
-        const commentsInputs = document.querySelectorAll('.comments');
-        commentsInputs.forEach((comment) => {
-          comment.reset();
-        });
-
-        const newData = data.map((item) => {
-          if (item._id == result._id) {
-            return result;
-          } else {
-            return item;
-          }
-        });
-        console.log('New', newData);
-        setData(newData);
+    if (comment.trim()) {
+      // let text = e.target[0].value;
+      let text = comment.trim();
+      // console.log(text);
+      fetch('/api/post/comment', {
+        method: 'put',
+        headers: {
+          'Content-Type': 'application/json',
+          token: localStorage.getItem('jwt'),
+        },
+        body: JSON.stringify({
+          postId,
+          text,
+        }),
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => res.json())
+        .then((result) => {
+          // console.log('Comments', result);
+          const commentsInputs = document.querySelectorAll('.comments');
+          commentsInputs.forEach((comment) => {
+            comment.reset();
+          });
+
+          const newData = data.map((item) => {
+            if (item._id == result._id) {
+              return result;
+            } else {
+              return item;
+            }
+          });
+          console.log('New', newData);
+          setData(newData);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   // Delete a Post /api/post/deletepost/:postId
@@ -247,7 +251,25 @@ const Home = () => {
                     makeComment(e, item._id);
                   }}
                 >
-                  <input type="text" placeholder="add a comment" />
+                  <input
+                    className="commentInput"
+                    type="text"
+                    onChange={(e) => setComment(e.target.value)}
+                    placeholder="add a comment"
+                    style={{
+                      float: 'left',
+                    }}
+                  />
+                  <a
+                    type="submit"
+                    className="waves-effect waves-light btn commentSubmit"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      makeComment(e, item._id);
+                    }}
+                  >
+                    Post
+                  </a>
                 </form>
               </div>
             </div>

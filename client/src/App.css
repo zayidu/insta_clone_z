@@ -80,6 +80,10 @@ h2 {
   flex-wrap: wrap;
   justify-content: space-around;
 }
+.commentSubmit {
+  background-color: #1a237e !important;
+  color: white !important;
+}
 
 .item {
   width: 30%;
