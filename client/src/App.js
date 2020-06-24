@@ -1,24 +1,75 @@
-import React from 'react';
+import React, { useEffect, createContext, useReducer, useContext } from 'react';
+import NavBar from './components/Navbar';
 import './App.css';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
 import Home from './components/screens/Home';
-import SignIn from './components/screens/SignIn';
+import Signin from './components/screens/SignIn';
 import Profile from './components/screens/Profile';
-import SignUp from './components/screens/SignUp';
+import Signup from './components/screens/Signup';
+import CreatePost from './components/screens/CreatePost';
+import { reducer, initialState } from './reducers/userReducer';
+import UserProfile from './components/screens/UserProfile';
+import Subscriber_sUserPosts from './components/screens/Subscriber_sUserPosts';
+import Reset from './components/screens/Reset';
+import NewPassword from './components/screens/Newpassword';
 
-import NavBar from './components/NavBar';
+// createContext
+export const UserContext = createContext();
+
+const Routing = () => {
+  const history = useHistory();
+  const { state, dispatch } = useContext(UserContext);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      dispatch({ type: 'USER', payload: user });
+    } else {
+      if (!history.location.pathname.startsWith('/reset'))
+        history.push('/signin');
+    }
+  }, []);
+  return (
+    <Switch>
+      <Route exact path="/">
+        <Home />
+      </Route>
+      <Route path="/signin">
+        <Signin />
+      </Route>
+      <Route path="/signup">
+        <Signup />
+      </Route>
+      <Route exact path="/profile">
+        <Profile />
+      </Route>
+      <Route path="/create">
+        <CreatePost />
+      </Route>
+      <Route path="/profile/:userid">
+        <UserProfile />
+      </Route>
+      <Route path="/myfollowingpost">
+        <Subscriber_sUserPosts />
+      </Route>
+      <Route exact path="/reset">
+        <Reset />
+      </Route>
+      <Route path="/reset/:token">
+        <NewPassword />
+      </Route>
+    </Switch>
+  );
+};
 
 function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    <BrowserRouter>
-      <div className="App">
+    <UserContext.Provider value={{ state, dispatch }}>
+      <BrowserRouter>
         <NavBar />
-        <Route exact path="/" component={Home} />
-        <Route exact path="/profile" component={Profile} />
-        <Route exact path="/signin" component={SignIn} />
-        <Route exact path="/signup" component={SignUp} />
-      </div>
-    </BrowserRouter>
+        <Routing />
+      </BrowserRouter>
+    </UserContext.Provider>
   );
 }
 

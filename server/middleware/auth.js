@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
-const config = require('config');
-const JWT_SECRET = config.get('jwtSecret');
+const { JWT_SECRET } = require('../../config/keys');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 

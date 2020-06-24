@@ -6,23 +6,19 @@ const auth = require('../../middleware/auth');
 // const Post = mongoose.model('Post');
 const Post = require('../../models/post');
 
-// @route   POST /api/post/createpost
-// @desc    Post - Register a new User
+// @route   POST /api/post/createposts
+// @desc    Post - Create a Post
 // @access  Private
 router.post('/createpost', auth, (req, res) => {
-  const { title, body, pic } = req.body;
-  if (
-    !title ||
-    !body
-    // || !pic
-  ) {
+  const { title, body, image_url } = req.body;
+  if (!title || !body || !image_url) {
     return res.status(422).json({ error: 'All the fields are required.' });
   }
   req.user.password = undefined;
   const post = new Post({
     title,
     body,
-    // photo: pic,
+    photo: image_url,
     postedBy: req.user,
   });
   post
@@ -40,9 +36,9 @@ router.post('/createpost', auth, (req, res) => {
 // @access  Private
 router.get('/allposts', auth, (req, res) => {
   Post.find()
-    .populate('postedBy', '_id name')
-    // .populate('comments.postedBy', '_id name')
-    // .sort('-createdAt')
+    .populate('postedBy', '_id name pic')
+    .populate('comments.postedBy', '_id name')
+    .sort('-createdAt')
     .then((posts) => {
       res.json({ posts });
     })
@@ -65,7 +61,10 @@ router.get('/myposts', auth, (req, res) => {
     });
 });
 
-router.get('/getsubpost', auth, (req, res) => {
+// @route   GET /api/post/mysubscribers/posts
+// @desc    GET - All Subscriber's Post
+// @access  Private
+router.get('/mysubscribers/posts', auth, (req, res) => {
   // if postedBy in following
   Post.find({ postedBy: { $in: req.user.following } })
     .populate('postedBy', '_id name')
@@ -79,6 +78,9 @@ router.get('/getsubpost', auth, (req, res) => {
     });
 });
 
+// @route   PUT /api/post/like
+// @desc    PUT - Like a post
+// @access  Private
 router.put('/like', auth, (req, res) => {
   Post.findByIdAndUpdate(
     req.body.postId,
@@ -88,14 +90,21 @@ router.put('/like', auth, (req, res) => {
     {
       new: true,
     }
-  ).exec((err, result) => {
-    if (err) {
-      return res.status(422).json({ error: err });
-    } else {
-      res.json(result);
-    }
-  });
+  )
+    .populate('comments.postedBy', '_id name')
+    .populate('postedBy', '_id name')
+    .exec((err, result) => {
+      if (err) {
+        return res.status(422).json({ error: err });
+      } else {
+        res.json(result);
+      }
+    });
 });
+
+// @route   PUT /api/post/unlike
+// @desc    PUT - Unlike a post
+// @access  Private
 router.put('/unlike', auth, (req, res) => {
   Post.findByIdAndUpdate(
     req.body.postId,
@@ -105,15 +114,21 @@ router.put('/unlike', auth, (req, res) => {
     {
       new: true,
     }
-  ).exec((err, result) => {
-    if (err) {
-      return res.status(422).json({ error: err });
-    } else {
-      res.json(result);
-    }
-  });
+  )
+    .populate('comments.postedBy', '_id name')
+    .populate('postedBy', '_id name')
+    .exec((err, result) => {
+      if (err) {
+        return res.status(422).json({ error: err });
+      } else {
+        res.json(result);
+      }
+    });
 });
 
+// @route   PUT /api/post/comment
+// @desc    PUT - Comment on a post
+// @access  Private
 router.put('/comment', auth, (req, res) => {
   const comment = {
     text: req.body.text,
@@ -134,11 +149,15 @@ router.put('/comment', auth, (req, res) => {
       if (err) {
         return res.status(422).json({ error: err });
       } else {
+        console.log(result);
         res.json(result);
       }
     });
 });
 
+// @route   DELETE /api/post/deletepost/:postId
+// @desc    DELETE - Delete a post
+// @access  Private
 router.delete('/deletepost/:postId', auth, (req, res) => {
   Post.findOne({ _id: req.params.postId })
     .populate('postedBy', '_id')

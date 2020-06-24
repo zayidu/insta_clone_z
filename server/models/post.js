@@ -12,22 +12,21 @@ const postSchema = new mongoose.Schema(
     },
     photo: {
       type: String,
-      default: 'Photo',
-      //   required: true,
+      required: true,
     },
-    // likes: [{ type: ObjectId, ref: 'User' }],
-    // comments: [
-    //   {
-    //     text: String,
-    //     postedBy: { type: ObjectId, ref: 'User' },
-    //   },
-    // ],
+    likes: [{ type: ObjectId, ref: 'User' }],
+    comments: [
+      {
+        text: String,
+        postedBy: { type: ObjectId, ref: 'User' },
+      },
+    ],
     postedBy: {
       type: ObjectId,
       ref: 'User',
     },
-  }
-  //   { timestamps: true }
+  },
+  { timestamps: true }
 );
 
 const Post = mongoose.model('Post', postSchema);

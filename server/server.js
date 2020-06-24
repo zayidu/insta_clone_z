@@ -32,7 +32,7 @@ app.use(
 );
 
 // After Application Build and Deployed, Letting know the Server to find and run the static files like CSS and JS from client/build folder.
-// app.use(express.static('client/build'));
+app.use(express.static('client/build'));
 
 // Routes/ API End-points:
 
@@ -42,13 +42,16 @@ app.use('/api/auth', require('./routes/api/auth'));
 // CRUD for Post Model
 app.use('/api/post', require('./routes/api/post'));
 
+// CRUD for USER Model
+app.use('/api/user', require('./routes/api/user'));
+
 // IN Production, Except the routes above, Routing the UI routes and anyother routes that isn't above will be routed to index.html as below:
-// if (process.env.NODE_ENV === 'production') {
-//   const path = require('path');
-//   app.get('/*', (req, res) => {
-//     res.sendfile(path.resolve(__dirname, '../client', 'build', 'index.html'));
-//   });
-// }
+if (process.env.NODE_ENV === 'production') {
+  const path = require('path');
+  app.get('/*', (req, res) => {
+    res.sendfile(path.resolve(__dirname, '../client', 'build', 'index.html'));
+  });
+}
 
 const port = process.env.PORT || 3001;
 

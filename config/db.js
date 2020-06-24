@@ -1,15 +1,13 @@
 const mongoose = require('mongoose');
 
-const config = require('config');
-const db = config.get('mongoURI');
-
-const configLocal = require('./config').get(process.env.NODE_ENV);
+const { MONGOURI } = require('../config/keys');
+// const { MONGOURI_LOCAL } = require('../config/keys');
 
 mongoose.Promise = global.Promise;
 const connectDB = async () => {
   try {
-    // await mongoose.connect(db, {
-    await mongoose.connect(configLocal.DATABASE, {
+    await mongoose.connect(MONGOURI, {
+      // await mongoose.connect(configLocal.DATABASE, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
