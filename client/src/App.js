@@ -3,15 +3,15 @@ import Navbar from './components/Headers/Navbar';
 import './App.css';
 import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
 import Home from './components/screens/Home';
-import Signin from './components/screens/SignIn';
+import SignIn from './components/screens/SignIn';
 import Profile from './components/screens/Profile';
-import Signup from './components/screens/Signup';
+import SignUp from './components/screens/SignUp';
 import CreatePost from './components/screens/CreatePost';
 import { reducer, initialState } from './reducers/userReducer';
 import UserProfile from './components/screens/UserProfile';
 import Subscriber_sUserPosts from './components/screens/Subscriber_sUserPosts';
 import Reset from './components/screens/Reset';
-import NewPassword from './components/screens/Newpassword';
+import NewPassword from './components/screens/NewPassword';
 
 // createContext
 export const UserContext = createContext();
@@ -34,10 +34,10 @@ const Routing = () => {
         <Home />
       </Route>
       <Route path="/signin">
-        <Signin />
+        <SignIn />
       </Route>
       <Route path="/signup">
-        <Signup />
+        <SignUp />
       </Route>
       <Route exact path="/profile">
         <Profile />

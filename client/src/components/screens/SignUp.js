@@ -4,7 +4,7 @@ import M from 'materialize-css';
 import { UserContext } from '../../App';
 import Spinner from '../widgets/Spinner';
 
-const SignIn = () => {
+const SignUp = () => {
   const { state, dispatch } = useContext(UserContext);
 
   const history = useHistory();
@@ -141,4 +141,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;

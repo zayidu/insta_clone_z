@@ -3,7 +3,7 @@ import { UserContext } from '../../App';
 import { useParams } from 'react-router-dom';
 import Spinner from '../widgets/Spinner';
 
-const Profile = () => {
+const UserProfile = () => {
   const [userProfile, setProfile] = useState(null);
 
   const { state, dispatch } = useContext(UserContext);
@@ -173,4 +173,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default UserProfile;

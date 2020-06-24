@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import M from 'materialize-css';
 
-const SignIn = () => {
+const NewPassword = () => {
   const history = useHistory();
   const [password, setPasword] = useState('');
   const { token } = useParams();
@@ -56,4 +56,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default NewPassword;
