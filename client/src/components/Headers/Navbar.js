@@ -1,8 +1,8 @@
 import React, { useContext, useRef, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { UserContext } from '../App';
+import { UserContext } from '../../App';
 import M from 'materialize-css';
-const NavBar = () => {
+const Navbar = () => {
   // Reference for the div in the below constant: So that it Shows the modal once the search Icon is clicked
   const searchModal = useRef(null);
 
@@ -145,4 +145,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default Navbar;
