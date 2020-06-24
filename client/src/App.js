@@ -11,7 +11,7 @@ import { reducer, initialState } from './reducers/userReducer';
 import UserProfile from './components/screens/UserProfile';
 import Subscriber_sUserPosts from './components/screens/Subscriber_sUserPosts';
 import Reset from './components/screens/Reset';
-import NewPassword from './components/screens/NewPassword';
+import Newpassword from './components/screens/Newpassword';
 
 // createContext
 export const UserContext = createContext();
@@ -55,7 +55,7 @@ const Routing = () => {
         <Reset />
       </Route>
       <Route path="/reset/:token">
-        <NewPassword />
+        <Newpassword />
       </Route>
     </Switch>
   );
