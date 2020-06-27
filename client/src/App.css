@@ -2,6 +2,8 @@
 
 a {
   color: black !important;
+  cursor: pointer;
+  margin-left: 6px;
 }
 
 .brand-logo,
@@ -10,6 +12,23 @@ h2 {
   font-weight: bolder;
   margin-left: 20px;
   width: auto;
+}
+h5 {
+  margin: 0 !important;
+}
+.content-left {
+  float: left;
+  margin-left: 8px;
+  padding: 5px;
+}
+
+.content-right {
+  margin-left: 75%;
+  margin-top: 12px;
+  float: left;
+}
+span.username {
+  margin-left: 6px;
 }
 
 .logoutbtn {
@@ -95,8 +114,13 @@ h2 {
   height: max-content;
   margin: 26px auto;
 }
-.collection-item {
+.collection-item h5 {
   width: 100%;
+}
+
+.card home-card {
+  margin: 4px;
+  padding: 10px;
 }
 
 #toast-container {

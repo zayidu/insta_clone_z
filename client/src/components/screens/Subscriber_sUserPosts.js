@@ -140,7 +140,11 @@ const Subscriber_sUserPosts = () => {
       {data.map((item) => {
         return (
           <div className="card home-card" key={item._id}>
-            <h5 style={{ padding: '5px' }}>
+            <h5
+              style={{
+                padding: '10px',
+              }}
+            >
               <Link
                 to={
                   item.postedBy._id !== state._id
@@ -148,7 +152,14 @@ const Subscriber_sUserPosts = () => {
                     : '/profile'
                 }
               >
-                {item.postedBy.name}
+                <img
+                  style={{
+                    width: '20px',
+                    borderRadius: '10px',
+                  }}
+                  src={item.postedBy && item.postedBy.pic}
+                />
+                <span className="username">{item.postedBy.name}</span>
               </Link>{' '}
               {item.postedBy._id == state._id && (
                 <i

@@ -149,17 +149,9 @@ const Home = () => {
             <div className="card home-card" key={item._id}>
               <h5
                 style={{
-                  padding: '5px',
+                  padding: '10px',
                 }}
               >
-                <image
-                  style={{
-                    width: '20px',
-                    height: '20px',
-                    borderRadius: '10px',
-                  }}
-                  src={item.postedBy && item.postedBy.pic}
-                />
                 <Link
                   to={
                     item.postedBy._id !== state._id
@@ -167,7 +159,14 @@ const Home = () => {
                       : '/profile'
                   }
                 >
-                  {item.postedBy.name}
+                  <img
+                    style={{
+                      width: '20px',
+                      borderRadius: '10px',
+                    }}
+                    src={item.postedBy && item.postedBy.pic}
+                  />
+                  <span className="username">{item.postedBy.name}</span>
                 </Link>{' '}
                 {item.postedBy._id == state._id && (
                   <i
