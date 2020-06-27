@@ -92,7 +92,7 @@ router.put('/like', auth, (req, res) => {
     }
   )
     .populate('comments.postedBy', '_id name')
-    .populate('postedBy', '_id name')
+    .populate('postedBy', '_id name pic')
     .exec((err, result) => {
       if (err) {
         return res.status(422).json({ error: err });
@@ -116,7 +116,7 @@ router.put('/unlike', auth, (req, res) => {
     }
   )
     .populate('comments.postedBy', '_id name')
-    .populate('postedBy', '_id name')
+    .populate('postedBy', '_id name pic')
     .exec((err, result) => {
       if (err) {
         return res.status(422).json({ error: err });
@@ -144,7 +144,7 @@ router.put('/comment', auth, (req, res) => {
     }
   )
     .populate('comments.postedBy', '_id name')
-    .populate('postedBy', '_id name')
+    .populate('postedBy', '_id name pic')
     .exec((err, result) => {
       if (err) {
         return res.status(422).json({ error: err });
