@@ -51,24 +51,35 @@ const SignIn = () => {
     <div className="mycard">
       <div className="card auth-card input-field">
         <h2>Instagram</h2>
-        <input
-          type="text"
-          placeholder="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="password"
-          value={password}
-          onChange={(e) => setPasword(e.target.value)}
-        />
-        <button
-          className="btn waves-effect waves-light #64b5f6 blue darken-1"
-          onClick={() => PostData()}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            PostData();
+          }}
         >
-          Login
-        </button>
+          <input
+            type="text"
+            placeholder="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="password"
+            value={password}
+            onChange={(e) => setPasword(e.target.value)}
+          />
+          <button
+            type="submit"
+            className="btn waves-effect waves-light #64b5f6 blue darken-1"
+            onClick={(e) => {
+              e.preventDefault();
+              PostData();
+            }}
+          >
+            Login
+          </button>
+        </form>
         <h5>
           <Link to="/signup">Don't have an account ?</Link>
         </h5>

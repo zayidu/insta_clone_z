@@ -100,39 +100,53 @@ const SignUp = () => {
     <div className="mycard">
       <div className="card auth-card input-field">
         <h2>Instagram</h2>
-        <input
-          type="text"
-          placeholder="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="password"
-          value={password}
-          onChange={(e) => setPasword(e.target.value)}
-        />
-        <div className="file-field input-field">
-          <div className="btn #64b5f6 blue darken-1">
-            <span>Upload image</span>
-            <input type="file" onChange={(e) => setImage(e.target.files[0])} />
-          </div>
-          <div className="file-path-wrapper">
-            <input className="file-path validate" type="text" />
-          </div>
-        </div>
-        <button
-          className="btn waves-effect waves-light #64b5f6 blue darken-1"
-          onClick={(e) => PostData(e)}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            PostData(e);
+          }}
         >
-          SignUP
-        </button>
+          <input
+            type="text"
+            placeholder="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="password"
+            value={password}
+            onChange={(e) => setPasword(e.target.value)}
+          />
+          <div className="file-field input-field">
+            <div className="btn #64b5f6 blue darken-1">
+              <span>Upload image</span>
+              <input
+                type="file"
+                onChange={(e) => setImage(e.target.files[0])}
+              />
+            </div>
+            <div className="file-path-wrapper">
+              <input className="file-path validate" type="text" />
+            </div>
+          </div>
+          <button
+            type="submit"
+            className="btn waves-effect waves-light #64b5f6 blue darken-1"
+            onClick={(e) => {
+              e.preventDefault();
+              PostData(e);
+            }}
+          >
+            SignUP
+          </button>
+        </form>
         <h5>
           <Link to="/signin">Already have an account ?</Link>
         </h5>
